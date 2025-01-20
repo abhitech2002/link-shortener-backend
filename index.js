@@ -1,6 +1,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
+const authRoutes = require('./routes/authRoutes');
 
 const connectDB = require('./config/db');
 
@@ -9,6 +10,8 @@ const app = express();
 
 app.use(express.json());
 app.use(morgan('dev'));
+
+app.use('/api/v1/auth', authRoutes);
 
 app.get('/', (req, res) => {
     res.send('Hello World');
