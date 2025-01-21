@@ -8,7 +8,7 @@ const authenticate = (req, res, next) => {
     const formattedToken = token.replace("Bearer ", "");
     const decoded = jwt.verify(formattedToken, process.env.JWT_SECRET);
 
-    req.user = decoded.user;
+    req.user = {id: decoded.id};
     next();
   } catch (error) {
     console.error("Token verification error:", error.message);
