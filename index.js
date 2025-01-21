@@ -2,6 +2,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
 const authRoutes = require('./routes/authRoutes');
+const urlRoutes = require('./routes/urlRoutes');
 
 const connectDB = require('./config/db');
 
@@ -12,6 +13,7 @@ app.use(express.json());
 app.use(morgan('dev'));
 
 app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1/url', urlRoutes);
 
 app.get('/', (req, res) => {
     res.send('Hello World');
