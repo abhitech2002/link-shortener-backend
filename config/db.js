@@ -1,18 +1,13 @@
-const mongoose = require("mongoose");
-require("dotenv").config();
+const mongoose = require('mongoose');
+require('dotenv').config(); 
 
 const connectDB = async (isTest = false) => {
-  const uri = isTest ? `${process.env.MONGO_URI}-test` : process.env.MONGO_URI;
+  const uri = isTest ? process.env.MONGO_URI_TEST : process.env.MONGO_URI;
   try {
-    const conn = await mongoose.connect(uri);
-
-    console.log(
-      `MongoDB connected (${isTest ? "Test" : "Production"}): ${
-        conn.connection.host
-      }`
-    );
+    await mongoose.connect(uri);
+    console.log(`MongoDB connected (${isTest ? 'Test' : 'Production'})`);
   } catch (error) {
-    console.error("MongoDB connection error:", error.message);
+    console.error('MongoDB connection error:', error.message);
     process.exit(1);
   }
 };
