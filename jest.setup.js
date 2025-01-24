@@ -1,25 +1,11 @@
-const mongoose = require("mongoose");
-const connectDB = require('./config/db');
+const connectDB = require("./config/db");
+const mongoose = require('mongoose');
 
 beforeAll(async () => {
-    try {
-        await connectDB(true);
-        console.log("Connected to the test database");
-    } catch (error) {
-        console.error("Failed to connect to the test database:", error.message);
-        process.exit(1);
-    }
+  await connectDB(true); // Connect to the test database
 });
 
 afterAll(async () => {
-    try {
-        if (process.env.MONGO_URI.includes("-test")) {
-            await mongoose.connection.dropDatabase(); // Clean up the test database
-            console.log("Test database cleaned up");
-        }
-        await mongoose.connection.close();
-        console.log("Database connection closed");
-    } catch (error) {
-        console.error("Error during database cleanup:", error.message);
-    }
+  await mongoose.connection.dropDatabase(); // Clean up test database
+  await mongoose.connection.close();
 });
