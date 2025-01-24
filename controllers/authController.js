@@ -23,7 +23,7 @@ const registerUser = async (req, res) => {
         const user = new User({ username, email, password });
         const result = await user.save();
 
-        res.status(201).json({ success: true, message: 'User registered successfully', data: result });
+        res.status(201).json({ success: true, message: 'User registered successfully', data: {username: result.username, email: result.email} });
 
     } catch (error) {
         res.status(500).json({ success: false, message: error.message });
@@ -63,7 +63,7 @@ const loginUser = async (req, res) => {
             maxAge: 3600000, 
         });
 
-        res.json({ success: true, message: 'Login successful', token });
+        res.json({ success: true, message: "User logged in successfully", token });
     } catch (err) {
         res.status(500).json({ success: false, message: err.message });
     }
